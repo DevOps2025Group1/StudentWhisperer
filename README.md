@@ -1,7 +1,7 @@
 # Dialogue-Based Student Portal Design using a Large Language Model (LLM)
 
-## Contact  
-**Nafis Tanveer Islam**  
+## Supervisor
+**Dr. Nafis Tanveer Islam**  
 📧 [n.t.islam@uva.nl](mailto:n.t.islam@uva.nl)  
 
 ## Description  

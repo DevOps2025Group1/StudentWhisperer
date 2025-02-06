@@ -53,3 +53,5 @@ The portal should:
 ## References  
 1. [Student Result Management System](https://github.com/shubhamsatishkumbhar/Student-Result-ManagementSystem-SRMS-)  
 2. [Falcon-LLM Education Platform](https://github.com/roshnn24/Falcon-LLM-Education-Platform)  
+
+This application is based on [an example project from streamlit](https://github.com/streamlit/llm-examples/tree/main)

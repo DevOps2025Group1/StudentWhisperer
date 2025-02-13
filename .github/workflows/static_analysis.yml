@@ -1,0 +1,46 @@
+name: Run static analysis on the code
+
+on:
+  pull_request:
+    branches: 
+      [ main ]
+
+jobs:
+  # Run pylint to check for code quality
+  pylint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          pip3 install pylint
+
+      - name: Run pylint
+        run: |
+          pylint . --max-line-length=120 --disable=invalid-name,missing-function-docstring
+
+  # Run Bandit to check for common security vulnerabilities
+  bandit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip3 install bandit
+
+      - name: Run Bandit
+        run: bandit -r .

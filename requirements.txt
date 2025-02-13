@@ -1,7 +1,8 @@
-streamlit==1.42
+streamlit>=1.42
 langchain>=0.0.217
 openai>=1.2
 duckduckgo-search
 anthropic>=0.3.0
 trubrics>=1.4.3
 langchain-community
+pyodbc>=4.0.30

@@ -1,3 +1,5 @@
+"""The main file of the project."""
+
 from openai import OpenAI
 import streamlit as st
 

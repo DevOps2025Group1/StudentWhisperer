@@ -1,3 +1,6 @@
+"""The main file of the project."""
+
+from openai import OpenAI
 import streamlit as st
 from dotenv import load_dotenv  
 from openai import AzureOpenAI 

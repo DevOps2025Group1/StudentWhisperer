@@ -20,7 +20,7 @@ class OpenAIClient:
 
     def generate_response(self, messages, temperature=0.7, max_tokens=800, top_p=0.9, **kwargs):
         """Generates a response from the GPT model based on the provided messages and optional parameters."""
-        
+
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
@@ -30,3 +30,7 @@ class OpenAIClient:
             **kwargs
         )
         return response.choices[0].message.content
+    
+    def empty_method(self):
+        """This is an empty method placeholder."""
+        pass

@@ -13,7 +13,6 @@ from azure.search.documents.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-
 class AzureSearchClient:
     """Azure Search Client to query documents using semantic search."""
 
@@ -49,3 +48,7 @@ class AzureSearchClient:
 
         retrieved_docs = [result.get("chunk", "") for result in results if result.get("chunk")]
         return "\n\n".join(retrieved_docs) if retrieved_docs else "No relevant documents found."
+    
+    def empty_method(self):
+        """This is an empty method placeholder."""
+        pass

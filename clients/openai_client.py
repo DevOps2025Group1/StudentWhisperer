@@ -32,5 +32,5 @@ class OpenAIClient:
         return response.choices[0].message.content
     
     def empty_method(self):
-        """This is an empty method placeholder."""
-        pass
+        """Placeholder method for future functionality."""
+        print("OpenAIClient is active and ready.")

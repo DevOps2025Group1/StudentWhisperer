@@ -50,5 +50,5 @@ class AzureSearchClient:
         return "\n\n".join(retrieved_docs) if retrieved_docs else "No relevant documents found."
     
     def empty_method(self):
-        """This is an empty method placeholder."""
-        pass
+        """Placeholder method for future functionality."""
+        print("AzureSearchClient is active and ready.")

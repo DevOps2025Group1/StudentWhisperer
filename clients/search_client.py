@@ -48,7 +48,7 @@ class AzureSearchClient:
 
         retrieved_docs = [result.get("chunk", "") for result in results if result.get("chunk")]
         return "\n\n".join(retrieved_docs) if retrieved_docs else "No relevant documents found."
-    
+
     def empty_method(self):
         """Placeholder method for future functionality."""
         print("AzureSearchClient is active and ready.")

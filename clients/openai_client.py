@@ -30,7 +30,7 @@ class OpenAIClient:
             **kwargs
         )
         return response.choices[0].message.content
-    
+
     def empty_method(self):
         """Placeholder method for future functionality."""
         print("OpenAIClient is active and ready.")

@@ -64,4 +64,3 @@ class OpenAIChatbot:
 if __name__ == "__main__":
     chatbot = OpenAIChatbot()
     chatbot.run()
-    

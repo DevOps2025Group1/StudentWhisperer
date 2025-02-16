@@ -1,23 +1,30 @@
+"""
+Chatbot application for University of Amsterdam students using OpenAI and Azure Search.
+"""
+
 import streamlit as st
 from clients.search_client import AzureSearchClient
 from clients.openai_client import OpenAIClient
 
+
 class OpenAIChatbot:
+    """Chatbot interface using Streamlit and Azure APIs."""
+
     def __init__(self):
         self.openai_client = OpenAIClient()
         self.search_client = AzureSearchClient()
         self.system_prompt = {
             "role": "system",
             "content": (
-                "You are an AI assistant designed to help students from the University Of Amsterdam."
-                "Provide clear and concise answers. You are only allowed to use the information provided in the conversation and documents."
-                "Do not provide false information or anything that is not mentioned in the documents. "
-                "Use relevant knowledge when needed."
-                "Do not mention to the user that your information is derived from the provided documents."
+                "You are an AI assistant designed to help students from the University of Amsterdam. "
+                "Provide clear and concise answers based solely on the information provided in the conversation "
+                "and documents. Do not provide false information or content not mentioned in the documents. "
+                "Use relevant knowledge when needed. Avoid mentioning that your information comes from the documents."
             )
         }
 
     def run(self):
+        """Run the Streamlit chatbot interface."""
         st.title("💬 Chatbot")
         st.caption("🚀 The Student Whisperer")
 
@@ -31,6 +38,7 @@ class OpenAIChatbot:
             self.process_input(prompt)
 
     def process_input(self, prompt: str):
+        """Handle user input, retrieve context, and generate response."""
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
 

@@ -38,4 +38,4 @@ jobs:
           echo "AZURE_SEARCH_SEMANTIC_CONFIG=${{ secrets.AZURE_SEARCH_SEMANTIC_CONFIG }}" >> $GITHUB_ENV
 
       - name: Run Application (for testing)
-        run: python Chatbot.py
+        run: timeout 60 python Chatbot.py

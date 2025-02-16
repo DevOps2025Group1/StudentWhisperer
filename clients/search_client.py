@@ -1,16 +1,22 @@
+"""
+Azure Search Client for document retrieval with semantic search capabilities.
+"""
+
+import os
+from dotenv import load_dotenv
+from azure.search.documents import SearchClient
 from azure.search.documents.models import (
     QueryType,
     QueryCaptionType,
-    QueryAnswerType
+    QueryAnswerType,
+    VectorizableTextQuery,
 )
-
-from azure.search.documents import SearchClient
-from azure.search.documents.models import VectorizableTextQuery
-import os
 from azure.core.credentials import AzureKeyCredential
-from dotenv import load_dotenv  
+
 
 class AzureSearchClient:
+    """Azure Search Client to query documents using semantic search."""
+
     def __init__(self):
         load_dotenv()
         self.service_endpoint = os.environ.get("AZURE_SEARCH_SERVICE_ENDPOINT")
@@ -23,11 +29,12 @@ class AzureSearchClient:
         )
 
     def search_documents(self, query: str, k_neighbors: int = 3, top_results: int = 3) -> str:
+        """Performs semantic search on documents using a vectorized text query."""
         vector_query = VectorizableTextQuery(
             text=query,
             k_nearest_neighbors=k_neighbors,
             fields="text_vector",
-            exhaustive=True
+            exhaustive=True,
         )
 
         results = self.client.search(
@@ -37,9 +44,8 @@ class AzureSearchClient:
             semantic_configuration_name=self.semantic_config_name,
             query_caption=QueryCaptionType.EXTRACTIVE,
             query_answer=QueryAnswerType.EXTRACTIVE,
-            top=top_results
+            top=top_results,
         )
 
         retrieved_docs = [result.get("chunk", "") for result in results if result.get("chunk")]
-
         return "\n\n".join(retrieved_docs) if retrieved_docs else "No relevant documents found."

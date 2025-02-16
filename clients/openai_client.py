@@ -1,8 +1,14 @@
+"""
+OpenAI Client that interacts with the Azure OpenAI API.
+"""
+
 import os
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 
 class OpenAIClient:
+    """Client for interacting with the Azure OpenAI API to generate responses using GPT models."""
+
     def __init__(self):
         load_dotenv()
         self.client = AzureOpenAI(
@@ -12,14 +18,15 @@ class OpenAIClient:
         )
         self.model = os.environ["AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID"]
 
-    def generate_response(self, messages, temperature=0.7, max_tokens=800, top_p=0.9, frequency_penalty=0, presence_penalty=0):
+    def generate_response(self, messages, temperature=0.7, max_tokens=800, top_p=0.9, **kwargs):
+        """Generates a response from the GPT model based on the provided messages and optional parameters."""
+        
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
             top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty
+            **kwargs
         )
         return response.choices[0].message.content

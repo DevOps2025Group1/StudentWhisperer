@@ -21,6 +21,22 @@ jobs:
       - name: Checkout to the branch
         uses: actions/checkout@v2
 
+      - name: Create .env file
+        run: |
+          echo "AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" >> .env
+          echo "AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }}" >> .env
+          echo "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID }}" >> .env
+          echo "AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID }}" >> .env
+          echo "AZURE_OPENAI_API_VERSION=${{ secrets.AZURE_OPENAI_API_VERSION }}" >> .env
+
+          echo "AZURE_SEARCH_SERVICE_ENDPOINT=${{ secrets.AZURE_SEARCH_SERVICE_ENDPOINT }}" >> .env
+          echo "AZURE_SEARCH_INDEX=${{ secrets.AZURE_SEARCH_INDEX }}" >> .env
+          echo "AZURE_SEARCH_DATASOURCE=${{ secrets.AZURE_SEARCH_DATASOURCE }}" >> .env
+          echo "AZURE_SEARCH_SKILLSET=${{ secrets.AZURE_SEARCH_SKILLSET }}" >> .env
+          echo "AZURE_SEARCH_INDEXER=${{ secrets.AZURE_SEARCH_INDEXER }}" >> .env
+          echo "AZURE_SEARCH_ADMIN_KEY=${{ secrets.AZURE_SEARCH_ADMIN_KEY }}" >> .env
+          echo "AZURE_SEARCH_SEMANTIC_CONFIG=${{ secrets.AZURE_SEARCH_SEMANTIC_CONFIG }}" >> .env
+
       - name: Azure Login
         uses: azure/login@v1
         with:

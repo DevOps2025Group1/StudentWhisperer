@@ -1,3 +1,6 @@
+"""
+This module provides a login page for the StudentWhisperer application using Streamlit.
+"""
 import streamlit as st
 import pandas as pd
 from .. import utils

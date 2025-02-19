@@ -1,3 +1,9 @@
+"""
+This module renders the Student Profile page using Streamlit. It displays the
+student's profile information, courses, and grades. It also provides a
+logout button to clear the session state.
+"""
+
 import streamlit as st
 import pandas as pd
 from .. import utils

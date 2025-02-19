@@ -39,7 +39,7 @@ jobs:
 
       - name: Create secrets.toml
         run: |
-          echo "{{ secrets.SECRETS_TOML }}" >> secrets.toml
+          echo "{{ secrets.SECRETS_TOML }}" >> .streamlit/secrets.toml
 
       - name: Azure Login
         uses: azure/login@v1

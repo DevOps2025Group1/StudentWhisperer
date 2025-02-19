@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Add Microsoft's GPG key and configure the Microsoft package repository for Debian 12 (Bookworm)
+# Required to install msodbcsql17
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/mssql-release.list && \
     apt-get update && \
@@ -28,7 +29,7 @@ RUN pip3 install -r requirements.txt
 # Copy the source code
 COPY . /usr/src/app
 
-# Expose the default Streamlit port
+# Expose Streamlit port
 EXPOSE 80
 
 ENTRYPOINT ["streamlit", "run"]

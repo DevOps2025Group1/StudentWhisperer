@@ -6,9 +6,9 @@ logout button to clear the session state.
 
 import streamlit as st
 import pandas as pd
-import utils
+from pages.utils import init_connection
 
-conn = utils.init_connection()
+conn = init_connection()
 
 def main():
     st.title("Student Profile")

@@ -32,11 +32,8 @@ class OpenAIChatbot:
         if "messages" not in st.session_state:
             st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
-            # Debug statement to confirm the page loads:
-    st.write("DEBUG: Chatbot page loaded!")
-
-    for msg in st.session_state.messages:
-        st.chat_message(msg["role"]).write(msg["content"])
+        for msg in st.session_state.messages:
+            st.chat_message(msg["role"]).write(msg["content"])
 
         if prompt := st.chat_input():
             self.process_input(prompt)

@@ -5,6 +5,7 @@ Chatbot application for University of Amsterdam students using OpenAI and Azure 
 import streamlit as st
 from clients.search_client import AzureSearchClient
 from clients.openai_client import OpenAIClient
+import dotenv
 
 
 class OpenAIChatbot:
@@ -62,5 +63,7 @@ class OpenAIChatbot:
 
 
 if __name__ == "__main__":
+    dotenv.load_dotenv()
+
     chatbot = OpenAIChatbot()
     chatbot.run()

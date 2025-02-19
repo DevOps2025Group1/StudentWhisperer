@@ -1,19 +1,9 @@
 import streamlit as st
 import pyodbc
 import pandas as pd
+from .. import utils
 
-@st.cache_resource
-def init_connection():
-    connection_str = (
-        "DRIVER={ODBC Driver 17 for SQL Server};"
-        "SERVER=" + st.secrets["server"] + ";"
-        "DATABASE=" + st.secrets["database"] + ";"
-        "UID=" + st.secrets["username"] + ";"
-        "PWD=" + st.secrets["password"]
-    )
-    return pyodbc.connect(connection_str)
-
-conn = init_connection()
+conn = utils.init_connection()
 
 def main():
     st.title("Student Profile")

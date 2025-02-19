@@ -1,6 +1,6 @@
 """
 This module provides a login page for the StudentWhisperer application using Streamlit.
-"""
+"""  # noqa: E501
 
 import streamlit as st
 import pandas as pd
@@ -8,7 +8,9 @@ from pages.utils import init_connection
 
 conn = init_connection()
 
+
 def main():
+    """Render the login page and handle user authentication."""
     st.title("Login")
 
     email = st.text_input("Email")
@@ -24,5 +26,6 @@ def main():
         else:
             st.error("Invalid email or password.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

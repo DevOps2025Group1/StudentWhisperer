@@ -1,0 +1,5 @@
+[MASTER]
+ignore=venv
+
+[FORMAT]
+max-line-length=120

@@ -6,7 +6,7 @@ logout button to clear the session state.
 
 import streamlit as st
 import pandas as pd
-from .. import utils
+import utils
 
 conn = utils.init_connection()
 

@@ -1,3 +1,6 @@
+"""
+Python utils used for pages.
+"""
 import streamlit as st
 import pyodbc
 

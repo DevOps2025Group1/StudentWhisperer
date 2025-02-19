@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bookworm
+FROM python:3.12-slim-bookworm
 
 # Set the working directory
 RUN mkdir -p /usr/src/app
@@ -21,10 +21,13 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /us
     apt-get update && \
     ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
-# Upgrade pip and install Python dependencies
-RUN pip3 install --upgrade pip
-COPY requirements.txt /usr/src/app/
-RUN pip3 install -r requirements.txt
+# Install uv and use it to install dependencies
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Add uv to PATH and install dependencies
+ENV PATH="/root/.local/bin:$PATH"
+COPY pyproject.toml /usr/src/app/
+RUN uv pip sync --system pyproject.toml
 
 # Copy the source code
 COPY . /usr/src/app

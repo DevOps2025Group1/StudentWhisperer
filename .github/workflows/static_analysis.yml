@@ -4,28 +4,36 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
-  # Run pylint to check for code quality
-  pylint:
+  # Run ruff to check for code quality
+  ruff:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python 3.11
+      - name: Set up Python 3.12
         uses: actions/setup-python@v3
         with:
-          python-version: 3.11
+          python-version: "3.12"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
-          pip3 install pylint
-          pip3 install -r requirements.txt
+          uv pip sync --system pyproject.toml
+          uv pip install --system ruff
 
-      - name: Run pylint
-        run: |
-          pylint .
+      - name: Run ruff
+        run: ruff check .
 
   # Run Bandit to check for common security vulnerabilities
   bandit:
@@ -34,13 +42,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python 3.11
+      - name: Set up Python 3.12
         uses: actions/setup-python@v3
         with:
-          python-version: 3.11
+          python-version: "3.12"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        run: pip3 install bandit
+        run: |
+          uv pip sync --system pyproject.toml
+          uv pip install --system bandit
 
       - name: Run Bandit
         run: bandit -r .

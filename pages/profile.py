@@ -10,11 +10,15 @@ from pages.utils import init_connection
 
 conn = init_connection()
 
+
 def main():
+    """Render the student profile page, displaying profile and course information."""
     st.title("Student Profile")
 
     if "student_id" not in st.session_state:
-        st.error("You must be logged in to view your profile. Please go to the Login page.")
+        st.error(
+            "You must be logged in to view your profile. Please go to the Login page."
+        )
         st.stop()
 
     student_id = st.session_state["student_id"]
@@ -43,7 +47,7 @@ def main():
     df_courses = pd.read_sql(query_courses, conn, params=(int(student_id),))
     if not df_courses.empty:
         st.subheader("Courses and Grades")
-        st.table(df_courses[['course_name', 'grade']])
+        st.table(df_courses[["course_name", "grade"]])
     else:
         st.info("No courses found for this student.")
 
@@ -52,5 +56,6 @@ def main():
             del st.session_state[key]
         st.success("Logged out. Please go to the Login page to log in again.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

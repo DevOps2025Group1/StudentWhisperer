@@ -17,11 +17,11 @@ class OpenAIChatbot:
         self.system_prompt = {
             "role": "system",
             "content": (
-                "You are an AI assistant designed to help students from the University of Amsterdam. "
-                "Provide clear and concise answers based solely on the information provided in the conversation "
-                "and documents. Do not provide false information or content not mentioned in the documents. "
-                "Use relevant knowledge when needed. Avoid mentioning that your information comes from the documents."
-            )
+                "You are an AI assistant designed to help students from the University of Amsterdam. "  # pylint: disable=C0321
+                "Provide clear and concise answers based solely on the information provided in the conversation "  # pylint: disable=C0321
+                "and documents. Do not provide false information or content not mentioned in the documents. "  # pylint: disable=C0321
+                "Use relevant knowledge when needed. Avoid mentioning that your information comes from the documents."  # pylint: disable=C0321
+            ),
         }
 
     def run(self):
@@ -30,7 +30,9 @@ class OpenAIChatbot:
         st.caption("🚀 The Student Whisperer")
 
         if "messages" not in st.session_state:
-            st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+            st.session_state["messages"] = [
+                {"role": "assistant", "content": "How can I help you?"}
+            ]
 
         for msg in st.session_state.messages:
             st.chat_message(msg["role"]).write(msg["content"])
@@ -45,10 +47,14 @@ class OpenAIChatbot:
 
         # Search for relevant context
         search_results = self.search_client.search_documents(prompt)
-        context_message = {
-            "role": "system",
-            "content": f"Relevant information from search:\n{search_results}"
-        } if search_results.strip() else None
+        context_message = (
+            {
+                "role": "system",
+                "content": f"Relevant information from search:\n{search_results}",
+            }
+            if search_results.strip()
+            else None
+        )
 
         # Build messages list with system prompt
         messages_with_context = [self.system_prompt]

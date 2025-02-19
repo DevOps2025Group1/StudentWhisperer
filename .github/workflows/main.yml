@@ -4,8 +4,7 @@ name: Trigger auto deployment for studentwhisperercontainer
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches:
-      [ main ]
+    branches: [main]
 
   # Allow manual trigger
   workflow_dispatch:
@@ -62,5 +61,3 @@ jobs:
           imageToBuild: devopsstudentwhisperer.azurecr.io/studentwhisperercontainer:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
-
-

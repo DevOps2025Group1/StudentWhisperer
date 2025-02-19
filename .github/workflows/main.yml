@@ -4,16 +4,16 @@ name: Trigger auto deployment for studentwhisperercontainer
 on:
   # Automatically trigger it when detected changes in repo
   push:
-    branches: 
+    branches:
       [ main ]
 
-  # Allow manual trigger 
-  workflow_dispatch:      
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       id-token: write #This is required for requesting the OIDC JWT Token
       contents: read #Required when GH token is used to authenticate with private repo
 
@@ -36,6 +36,10 @@ jobs:
           echo "AZURE_SEARCH_INDEXER=${{ secrets.AZURE_SEARCH_INDEXER }}" >> .env
           echo "AZURE_SEARCH_ADMIN_KEY=${{ secrets.AZURE_SEARCH_ADMIN_KEY }}" >> .env
           echo "AZURE_SEARCH_SEMANTIC_CONFIG=${{ secrets.AZURE_SEARCH_SEMANTIC_CONFIG }}" >> .env
+
+      - name: Create secrets.toml
+        run: |
+          echo "{{ secrets.SECRETS_TOML }}" >> secrets.toml
 
       - name: Azure Login
         uses: azure/login@v1

@@ -12,12 +12,12 @@ conn = init_connection()
 
 
 def main():
-    """Render the student profile page, displaying profile and course information."""  # noqa: E501
+    """Render the student profile page, displaying profile and course information."""
     st.title("Student Profile")
 
     if "student_id" not in st.session_state:
         st.error(
-            "You must be logged in to view your profile. Please go to the Login page."  # noqa: E501
+            "You must be logged in to view your profile. Please go to the Login page."
         )
         st.stop()
 

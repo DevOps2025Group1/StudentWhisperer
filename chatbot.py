@@ -1,6 +1,6 @@
 """
 Chatbot application for University of Amsterdam students using OpenAI and Azure Search.
-"""  # noqa: E501
+"""
 
 import streamlit as st
 import dotenv
@@ -17,10 +17,10 @@ class OpenAIChatbot:
         self.system_prompt = {
             "role": "system",
             "content": (
-                "You are an AI assistant designed to help students from the University of Amsterdam. "  # noqa: E501, pylint: disable=C0321
-                "Provide clear and concise answers based solely on the information provided in the conversation "  # noqa: E501, pylint: disable=C0321
-                "and documents. Do not provide false information or content not mentioned in the documents. "  # noqa: E501, pylint: disable=C0321
-                "Use relevant knowledge when needed. Avoid mentioning that your information comes from the documents."  # noqa: E501, pylint: disable=C0321
+                "You are an AI assistant designed to help students from the University of Amsterdam. "  # pylint: disable=C0321
+                "Provide clear and concise answers based solely on the information provided in the conversation "  # pylint: disable=C0321
+                "and documents. Do not provide false information or content not mentioned in the documents. "  # pylint: disable=C0321
+                "Use relevant knowledge when needed. Avoid mentioning that your information comes from the documents."  # pylint: disable=C0321
             ),
         }
 
@@ -50,7 +50,7 @@ class OpenAIChatbot:
         context_message = (
             {
                 "role": "system",
-                "content": f"Relevant information from search:\n{search_results}",  # noqa: E501
+                "content": f"Relevant information from search:\n{search_results}",
             }
             if search_results.strip()
             else None

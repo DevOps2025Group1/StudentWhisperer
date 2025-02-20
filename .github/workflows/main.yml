@@ -42,10 +42,10 @@ jobs:
 
       - name: Create secrets.toml
         run: |
-          echo "server='${{ secrets.SERVER }}'" >> .streamlit/secrets.toml
-          echo "database='${{ secrets.DATABASE }}'" >> .streamlit/secrets.toml
-          echo "username='${{ secrets.DB_USERNAME }}'" >> .streamlit/secrets.toml
-          echo "password='${{ secrets.DB_PASSWORD }}'" >> .streamlit/secrets.toml
+          echo 'server="${{ secrets.SERVER }}"' >> .streamlit/secrets.toml
+          echo 'database="${{ secrets.DATABASE }}"'' >> .streamlit/secrets.toml
+          echo 'username="${{ secrets.DB_USERNAME }}"'' >> .streamlit/secrets.toml
+          echo 'password="${{ secrets.DB_PASSWORD }}"'' >> .streamlit/secrets.toml
 
 
       - name: Azure Login

@@ -36,4 +36,4 @@ COPY . /usr/src/app
 EXPOSE 80
 
 ENTRYPOINT ["streamlit", "run"]
-CMD ["chatbot.py"]
+CMD ["app.py"]

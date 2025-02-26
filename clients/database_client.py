@@ -1,7 +1,5 @@
 # db_connector.py
-import pyodbc
-from typing import Optional, List, Dict
-import streamlit as st
+from typing import Optional
 from modules.student import Student
 from clients.utils import init_connection
 
@@ -32,3 +30,5 @@ class DatabaseClient:
         courses = [{"course_name": row[3], "grade": row[4]} for row in results]
 
         return Student(student_id, name, email, courses)
+
+

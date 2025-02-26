@@ -35,5 +35,5 @@ COPY . /usr/src/app
 # Expose Streamlit port
 EXPOSE 80
 
-ENTRYPOINT ["streamlit", "run"]
+ENTRYPOINT ["python3"]
 CMD ["app.py"]

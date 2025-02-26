@@ -5,6 +5,7 @@ Chatbot application for University of Amsterdam students using OpenAI and Azure 
 import streamlit as st
 from clients.search_client import AzureSearchClient
 from clients.openai_client import OpenAIClient
+from clients.database_client import DatabaseClient
 
 
 class OpenAIChatbot:
@@ -13,6 +14,7 @@ class OpenAIChatbot:
     def __init__(self):
         self.openai_client = OpenAIClient()
         self.search_client = AzureSearchClient()
+        self.database_client = DatabaseClient()
         self.system_prompt = {
             "role": "system",
             "content": (
@@ -44,12 +46,25 @@ class OpenAIChatbot:
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
 
+        student = self.database_client.get_student_info('jane.smith@student.uva.nl')
+        student_context = (
+                f"Student Information:\n"
+                f"- Name: {student.name}\n"
+                f"- Email: {student.email}\n"
+                f"- Courses and Grades:\n"
+            )
+
+        for course in student.courses:
+                student_context += (
+                    f"  - {course['course_name']}: {course['grade']}\n"
+            )
+
         # Search for relevant context
         search_results = self.search_client.search_documents(prompt)
         context_message = (
             {
                 "role": "system",
-                "content": f"Relevant information from search:\n{search_results}",
+                "content": f"{student_context}\nRelevant information from search:\n{search_results}",
             }
             if search_results.strip()
             else None

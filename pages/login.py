@@ -4,7 +4,7 @@ This module provides a login page for the StudentWhisperer application using Str
 
 import streamlit as st
 import pandas as pd
-from pages.utils import init_connection
+from clients.utils import init_connection
 
 conn = init_connection()
 

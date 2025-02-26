@@ -10,10 +10,6 @@ class DatabaseClient:
         """Initialize the database connection using Streamlit secrets."""
         self.conn = init_connection()
 
-    @st.cache_resource
-    def get_connection(self):
-        return self.conn
-
 
     def get_student_info(self, email: str) -> Optional[Student]:
         """Retrieve student information including courses and grades."""

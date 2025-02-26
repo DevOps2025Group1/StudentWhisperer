@@ -46,6 +46,7 @@ class OpenAIChatbot:
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
 
+        # TODO:Raplace this later with the logic to get student information
         student = self.database_client.get_student_info('jane.smith@student.uva.nl')
         student_context = (
                 f"Student Information:\n"

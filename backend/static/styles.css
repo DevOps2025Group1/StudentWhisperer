@@ -55,7 +55,7 @@ body#no-sidebar {
 .wrapper {
   box-sizing: border-box;
   background-color: var(--incoming-chat-bg);
-  height: 50vh;
+  height: max(620px, 50vh);
   width: min(40%, 600px);
   padding: 10px;;
   border-radius: 20px 20px 20px 20px;
@@ -66,7 +66,7 @@ body#no-sidebar {
   text-align: center;
 }
 .wrapper#home {
-  height: 40vh;
+  height: max(440px, 40vh);
   width: min(40%, 600px);
   padding: 10px;;
   border-radius: 20px 20px 20px 20px;

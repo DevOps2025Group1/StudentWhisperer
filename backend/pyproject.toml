@@ -1,0 +1,14 @@
+[project]
+name = "studentwhisperer"
+version = "0.1.0"
+description = "Student Whisperer is an AI-powered chatbot designed to help students from the University of Amsterdam with their questions and concerns."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask==3.1.0",
+    "pyodbc==5.2.0",
+    "python-dotenv"
+]
+
+[dependency-groups]
+dev = ["ruff>=0.9.6"]

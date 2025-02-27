@@ -28,12 +28,13 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:$PATH"
 COPY pyproject.toml /usr/src/app/
 RUN uv pip sync --system pyproject.toml
+RUN pip3 install flask
 
 # Copy the source code
 COPY . /usr/src/app
 
 # Expose Streamlit port
-EXPOSE 80
+EXPOSE 5000
 
-ENTRYPOINT ["streamlit", "run"]
+ENTRYPOINT ["python3"]
 CMD ["app.py"]

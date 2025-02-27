@@ -26,27 +26,19 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" >> .env
-          echo "AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }}" >> .env
-          echo "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID }}" >> .env
-          echo "AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID }}" >> .env
-          echo "AZURE_OPENAI_API_VERSION=${{ secrets.AZURE_OPENAI_API_VERSION }}" >> .env
+          echo "AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" >> backend/.env
+          echo "AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }}" >> backend/.env
+          echo "AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_EMBEDDING_DEPLOYMENT_ID }}" >> backend/.env
+          echo "AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID=${{ secrets.AZURE_OPENAI_GPT_MODEL_DEPLOYMENT_ID }}" >> backend/.env
+          echo "AZURE_OPENAI_API_VERSION=${{ secrets.AZURE_OPENAI_API_VERSION }}" >> backend/.env
 
-          echo "AZURE_SEARCH_SERVICE_ENDPOINT=${{ secrets.AZURE_SEARCH_SERVICE_ENDPOINT }}" >> .env
-          echo "AZURE_SEARCH_INDEX=${{ secrets.AZURE_SEARCH_INDEX }}" >> .env
-          echo "AZURE_SEARCH_DATASOURCE=${{ secrets.AZURE_SEARCH_DATASOURCE }}" >> .env
-          echo "AZURE_SEARCH_SKILLSET=${{ secrets.AZURE_SEARCH_SKILLSET }}" >> .env
-          echo "AZURE_SEARCH_INDEXER=${{ secrets.AZURE_SEARCH_INDEXER }}" >> .env
-          echo "AZURE_SEARCH_ADMIN_KEY=${{ secrets.AZURE_SEARCH_ADMIN_KEY }}" >> .env
-          echo "AZURE_SEARCH_SEMANTIC_CONFIG=${{ secrets.AZURE_SEARCH_SEMANTIC_CONFIG }}" >> .env
-
-      - name: Create secrets.toml
-        run: |
-          echo 'server="${{ secrets.SERVER }}"' >> .streamlit/secrets.toml
-          echo 'database="${{ secrets.DATABASE }}"' >> .streamlit/secrets.toml
-          echo 'username="${{ secrets.DB_USERNAME }}"' >> .streamlit/secrets.toml
-          echo 'password="${{ secrets.DB_PASSWORD }}"' >> .streamlit/secrets.toml
-
+          echo "AZURE_SEARCH_SERVICE_ENDPOINT=${{ secrets.AZURE_SEARCH_SERVICE_ENDPOINT }}" >> backend/.env
+          echo "AZURE_SEARCH_INDEX=${{ secrets.AZURE_SEARCH_INDEX }}" >> backend/.env
+          echo "AZURE_SEARCH_DATASOURCE=${{ secrets.AZURE_SEARCH_DATASOURCE }}" >> backend/.env
+          echo "AZURE_SEARCH_SKILLSET=${{ secrets.AZURE_SEARCH_SKILLSET }}" >> backend/.env
+          echo "AZURE_SEARCH_INDEXER=${{ secrets.AZURE_SEARCH_INDEXER }}" >> backend/.env
+          echo "AZURE_SEARCH_ADMIN_KEY=${{ secrets.AZURE_SEARCH_ADMIN_KEY }}" >> backend/.env
+          echo "AZURE_SEARCH_SEMANTIC_CONFIG=${{ secrets.AZURE_SEARCH_SEMANTIC_CONFIG }}" >> backend/.env
 
       - name: Azure Login
         uses: azure/login@v1
@@ -58,8 +50,8 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
-          appSourcePath: ${{ github.workspace }}
-          _dockerfilePathKey_: _dockerfilePath_
+          appSourcePath: ${{ github.workspace }}/backend
+          _dockerfilePathKey_: backend/Dockerfile
           registryUrl: devopsstudentwhisperer.azurecr.io
           registryUsername: ${{ secrets.STUDENTWHISPERERCONTAINER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.STUDENTWHISPERERCONTAINER_REGISTRY_PASSWORD }}

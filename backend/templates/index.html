@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box">
-            <div class="bot-message">Hello! How can I help?</div>
-        </div>
-        <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
-        <button onclick="sendMessage()">Send</button>
-    </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - The Student Whisperer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </style>
+</head>
+<body id="no-sidebar">
+  <div class="wrapper" id="home">
+    <!-- Emblem directly above the text -->
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Emblem">
+    <h1>Home</h1>
+    <p>Welcome to the Student Whisperer, the non-official UvA Student Portal!</p><br>
+    <form>
+      <a href="{{ url_for('register') }}">Register</a><br>
+      <span>Already registered? <a href="{{ url_for('login') }}">Login</a></span>
+    </form>
+  </div>
 </body>
 </html>
